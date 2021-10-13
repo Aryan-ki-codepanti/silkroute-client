@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
-import PaymentSuccessfulImg from '../img/payment-successful.png';
+import PaymentSuccessfulImg from '../../img/payment-successful.png';
 
 
 // styled components

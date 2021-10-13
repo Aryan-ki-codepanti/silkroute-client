@@ -8,11 +8,13 @@ import "./css/SignUp.css";
 import "./css/utils.css";
 import { BrowserRouter , Route , Switch } from "react-router-dom";
 import SignUp from "./components/SignUp";
-import PaymentSuccessful from "./components/PaymentSuccessful";
+import OrderScreen from "./components/consumer/OrderScreen";
+import PaymentSuccessful from "./components/consumer/PaymentSuccessful";
 
 function App() {
     return (
-        <div style={{minHeight: "100vh"}} className="d-flex">
+        <div style={{minHeight: "100vh"}} className="">
+            
             {/* <OrderListing /> */}
             {/* <div className="container px-4 border border-2 py-5 " style={{width: "500px"}}> */}
                 {/* <OrderSummaryListItem
@@ -59,6 +61,7 @@ function App() {
                     <Route  path="/home" exact component={Home} />
                     <Route  path="/paymentsuccessful" exact component={PaymentSuccessful} />
                     <Route  path="/orderlisting" exact component={OrderListing} />
+                    <Route path="/orderView/:id" exact component={OrderScreen} />
                 </Switch>
             </BrowserRouter>
             

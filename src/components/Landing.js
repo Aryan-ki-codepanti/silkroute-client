@@ -87,7 +87,7 @@ export default function Landing(props) {
 
         doRedirect();
 
-    }, []);
+    }, []); //eslint-disable-line
 
     const handleAddOrderLanding = () => {
         history.push("/orderlisting");
