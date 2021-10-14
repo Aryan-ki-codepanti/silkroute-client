@@ -22,7 +22,8 @@ export default function SignUp(props) {
     const handleSignClick = (event) => {
         event.preventDefault();
         // click the link to route signup to OTP content
-        localStorage.setItem("phone" , phoneNumber);
+        // localStorage.setItem("phone" , phoneNumber); NO LOCAL STORAGE TILL OTP is verified , phone is passed as prop to OTP
+
         document.getElementById("otpLink").click();
     };
 
@@ -87,7 +88,7 @@ export default function SignUp(props) {
                         {signUpBox}
                     </Route>
                     <Route exact path="/otp">
-                        <OTP/>
+                        <OTP phoneNumber={ phoneNumber }/>
                     </Route>
 
                 </Switch>

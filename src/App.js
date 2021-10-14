@@ -61,7 +61,7 @@ function App() {
                     <Route  path="/home" exact component={Home} />
                     <Route  path="/paymentsuccessful" exact component={PaymentSuccessful} />
                     <Route  path="/orderlisting" exact component={OrderListing} />
-                    <Route path="/orderView/:id" exact component={OrderScreen} />
+                    <Route path="/orderview/:id" exact component={OrderScreen} />
                 </Switch>
             </BrowserRouter>
             

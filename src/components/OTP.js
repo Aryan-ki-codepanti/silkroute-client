@@ -79,14 +79,14 @@ const OTPReceive = styled.div`
         line-height: 22px;
         color: #2A6059; 
         text-transform: uppercase;
-
+        cursor: pointer;
     }
 ` ;
 
 const Wrapper = styled.div``;
 
 
-export default function OTP(props) {
+export default function OTP({ phoneNumber }) {
     const host = process.env.REACT_APP_SERVER_DOMAIN;
 
 
@@ -119,6 +119,8 @@ export default function OTP(props) {
     }
     
     const createUserIfExists = async(phone) => {
+        // set localStorage
+        localStorage.setItem("phone" , phoneNumber);
         // API Call
         await axios({
             method: "post",
@@ -135,7 +137,7 @@ export default function OTP(props) {
     const handleVerifyClick = ()=>{
         setOTP(Object.values(input).join(""));
 
-        let phone = localStorage.getItem("phone");
+        let phone = phoneNumber;
         
         axios.get(`http://localhost:3001/verify?phone=${phone}&code=${userOTP}`)
                                                                 .then(res => {
@@ -162,20 +164,27 @@ export default function OTP(props) {
         setOTP(Object.values(input).join(""));
     }
     
+    const handleResendClick = () => {
+        let phone = phoneNumber;
+        axios.get(`http://localhost:3001/login?phone=${phone}`).then().catch(err => {
+            console.log(err);
+        });
+    };
+
     useEffect(()=>{
         setOTP(Object.values(input).join(""));
     } , [input.num1 , input.num2 , input.num3 , input.num4]); // eslint-disable-line
     
     
     useEffect(() => {
-        let phone = localStorage.getItem("phone");
+        let phone = phoneNumber;
         axios.get(`http://localhost:3001/login?phone=${phone}`).then().catch(err => {
             console.log(err);
         });
     }, []);
 
     // fetch phone number from localStorage
-    const phone = localStorage.getItem("phone"); 
+    const phone = phoneNumber 
     
     return (
         <Container>
@@ -186,7 +195,7 @@ export default function OTP(props) {
 
             <ContentBox className="my-5">
                 <p>We have a sent a verification code to <br /> your registered phone number</p>
-                <span  className="d-flex justify-content-center align-items-center">{phone} <img src={pencil} alt="pencil-svg" /> </span>
+                <span  className="d-flex justify-content-center align-items-center">{ phoneNumber } <img src={pencil} alt="pencil-svg" /> </span>
             </ContentBox>
 
             <Wrapper className="px-3">
@@ -204,7 +213,7 @@ export default function OTP(props) {
 
             <OTPReceive className="text-center px-4">    
                 <p className="mb-1">Didn't receive OTP</p>
-                <span>Resend</span>
+                <span onClick={ handleResendClick }>Resend</span>
             </OTPReceive>
 
         </Container>
