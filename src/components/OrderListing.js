@@ -246,6 +246,7 @@ export default function OrderListing() {
                         name="title"
                         value={title}
                         onChange={handleOnChangeTitle}
+                        autoComplete="off"
                     />
                 </TitleBox>
 
@@ -255,18 +256,21 @@ export default function OrderListing() {
                         placeholder="Item"
                         name="item"
                         id="item"
+                        autoComplete="off"
                     />
                     <input
                         type="text"
                         placeholder="Quantity"
                         name="quantity"
                         id="quantity"
+                        autoComplete="off"
                     />
                     <input
                         type="text"
                         placeholder="Price"
                         name="pricePerItem"
                         id="pricePerItem"
+                        autoComplete="off"
                     />
                 </InputRowBox>
 
