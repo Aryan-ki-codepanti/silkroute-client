@@ -165,6 +165,11 @@ const OrderListing = () => {
     const [overlay , setOverlay] = useState(null);
     const paymentRef = useRef(null);
     const shareRef = useRef(null);
+
+    const itemRef = useRef(null);
+    const quantityRef = useRef(null);
+    const priceRef = useRef(null);
+
     const history = useHistory();
     const host = process.env.REACT_APP_SERVER_DOMAIN;
 
@@ -237,6 +242,22 @@ const OrderListing = () => {
                 });
         }
     }, []);
+
+    useEffect(() => {
+        if (overlay){
+            // hide inputs
+            itemRef.current.style.visibility = "hidden"; 
+            quantityRef.current.style.visibility = "hidden"; 
+            priceRef.current.style.visibility = "hidden"; 
+            
+        }
+        else{
+            itemRef.current.style.visibility = "visible"; 
+            quantityRef.current.style.visibility = "visible"; 
+            priceRef.current.style.visibility = "visible"; 
+
+        }
+    } , [ overlay ]);
 
     const handleOnChangeTitle = event => {
         setTitle(event.target.value);
@@ -323,6 +344,7 @@ const OrderListing = () => {
                         name="item"
                         id="item"
                         autoComplete="off"
+                        ref={ itemRef }
                     />
                     <input
                         type="text"
@@ -330,6 +352,7 @@ const OrderListing = () => {
                         name="quantity"
                         id="quantity"
                         autoComplete="off"
+                        ref={ quantityRef }
                     />
                     <input
                         type="text"
@@ -337,6 +360,7 @@ const OrderListing = () => {
                         name="pricePerItem"
                         id="pricePerItem"
                         autoComplete="off"
+                        ref={ priceRef }
                     />
                 </InputRowBox>
 

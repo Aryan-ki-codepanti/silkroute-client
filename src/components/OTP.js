@@ -61,7 +61,8 @@ const VerifyBtn = styled.div`
         letter-spacing: 0.04em;
         border: none;
         border-radius: 10px;
-        padding: 0.5em 7.5em;
+        padding: 0.8125em 7.5em;
+        font-size: 1rem;
     }
 
 ` ;
