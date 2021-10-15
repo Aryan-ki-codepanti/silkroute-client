@@ -39,9 +39,12 @@ const RightIcons = styled.div`
         border-radius: 4px;
         color: #fff;
     }
+    button:hover{
+        color: #fff;
+    }
 `;
 
-const OrderBottomBar = ({className}) => {
+const OrderBottomBar = ({ className , handleShare }) => {
     return (
         <Wrapper className={`d-flex p-3  bg-green`}>
 
@@ -61,7 +64,7 @@ const OrderBottomBar = ({className}) => {
             <RightIcons className="d-flex align-items-center gap-4">
                 <IconBox> <img src={WhatsappSVG} alt="whatsapp-svg" /> </IconBox>
                 <IconBox>
-                    <button className="btn d-flex justify-content-center align-items-center gap-2">
+                    <button className="btn d-flex justify-content-center align-items-center gap-2" onClick= { handleShare }>
                         <img src={ShareSVG} alt="share-svg" />
                         Share
                     </button>

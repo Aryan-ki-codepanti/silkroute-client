@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect , useRef } from "react";
 import styled from "styled-components";
 import PaymentSettingsSVG from "../img/svg/settings.svg";
 import ArrowLeft from "../img/svg/arrow-left.svg";
@@ -10,12 +10,14 @@ import axios from "axios";
 import ShareVia from "./ShareVia";
 
 const BackButton = styled.div`
+    padding: 0.6em 0.8em 0;
     img {
         cursor: pointer;
     }
 `;
 
 const TitleBox = styled.div`
+    padding: 0 0.8em;
     input,
     input:focus {
         border: none !important;
@@ -31,15 +33,42 @@ const Container = styled.div`
     max-width: 500px;
     width: 95%;
     margin: auto;
-    padding: 0.6em 0.8em;
+    /* padding: 0.6em 0.8em; */
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     position: relative;
     z-index: 10;
+
+    .paymentCollapse{
+        background: #fff;
+        position: fixed;
+        width: 100%;
+        max-width: 31.3rem;
+        bottom: -500px;
+        z-index: 100;
+        transition: all 0.5s ease-out;
+        padding: 1.6em;
+        border-radius: 16px 16px 0 0;
+    }
+    
+    .shareCollapse{
+        background: #fff;
+        position: fixed;
+        width: 100%;
+        max-width: 31.3rem;
+        bottom: -500px;
+        z-index: 100;
+        transition: all 0.5s ease-out;
+        padding: 0.6em;
+        border-radius: 16px 16px 0 0;
+
+    }
+
 `;
 
 const InputRowBox = styled.div`
+    padding: 0 1.3em;
     min-height: 5vh;
     --placeholder-color: rgba(15, 15, 15, 0.15);
 
@@ -97,6 +126,18 @@ const InputRowBox = styled.div`
 
 const ListingBox = styled.div`
     min-height: 3vh;
+    padding: 0 0.8em;
+`;
+
+const Overlay = styled.div`
+    position: absolute;
+    
+    background-color: rgba(0,0,0,0.7);
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
 `;
 
 const OrderListing = () => {
@@ -121,6 +162,9 @@ const OrderListing = () => {
     const [orderItems, setOrderItems] = useState([]);
     const [paymentSettingsVisibility, setPaymentSettingsVisibility] =
         useState(false);
+    const [overlay , setOverlay] = useState(null);
+    const paymentRef = useRef(null);
+    const shareRef = useRef(null);
     const history = useHistory();
     const host = process.env.REACT_APP_SERVER_DOMAIN;
 
@@ -222,6 +266,30 @@ const OrderListing = () => {
 
     };
 
+    const handlePaymentClick = () => {
+        setTimeout(() => {
+            setOverlay(prev => true);
+        } , 100);
+        setPaymentSettingsVisibility(prev => true);
+        paymentRef.current.style.bottom = "0";
+    };
+    
+    const closeOverlay = () => {
+        setOverlay(prev => false);
+        setPaymentSettingsVisibility(prev => false);
+        paymentRef.current.style.bottom = "-500px";
+        shareRef.current.style.bottom = "-500px";
+    };
+    
+    const handleShare = () => {
+        setTimeout(() => {
+            setOverlay(prev => true);
+        } , 100);
+        setPaymentSettingsVisibility(prev => true);
+        shareRef.current.style.bottom = "0";
+        
+    };
+
     return (
         <>
             <Container className="">
@@ -230,11 +298,7 @@ const OrderListing = () => {
                     <img
                         src={PaymentSettingsSVG}
                         alt="payment-settings-svg"
-                        onClick={() =>
-                            setPaymentSettingsVisibility(
-                                prev => !paymentSettingsVisibility
-                            )
-                        }
+                        onClick={ handlePaymentClick }
                     />
                 </BackButton>
 
@@ -251,7 +315,7 @@ const OrderListing = () => {
                     />
                 </TitleBox>
 
-                <InputRowBox className="d-flex justify-content-between gap-4 mt-3 py-2 px-2">
+                <InputRowBox className="d-flex justify-content-between gap-4 mt-3 py-2">
                     <input
                         type="text"
                         placeholder="Item"
@@ -289,14 +353,19 @@ const OrderListing = () => {
                     })}
                 </ListingBox>
 
-                {!paymentSettingsVisibility && (
-                    <OrderBottomBar className="mt-auto" />
-                )}
-                <PaymentSettingsCollapse
-                    paymentSettingsVisibility={paymentSettingsVisibility}
-                    handleOnSave={handleOnSave}
-                />
-                <ShareVia />
+                
+                {!paymentSettingsVisibility && <OrderBottomBar className="mt-auto" handleShare={ handleShare } />}
+                
+                <div className="paymentCollapse" ref = {paymentRef}>
+                    <PaymentSettingsCollapse
+                        handleOnSave={ handleOnSave }
+                        closeOverlay={ closeOverlay }
+                    />
+                </div>
+                <div className="shareCollapse" ref = { shareRef }>
+                    <ShareVia />
+                </div>
+                {overlay && <Overlay onClick={ closeOverlay }></Overlay>}
             </Container>
         </>
     );

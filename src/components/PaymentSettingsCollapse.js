@@ -44,6 +44,7 @@ const ContentBox = styled.div`
 `;
 
 const ButtonBox = styled.div`
+    background-color: #fff;
     button{
         text-transform: uppercase;
         font-weight: 900;
@@ -68,13 +69,13 @@ const ButtonBox = styled.div`
 `;
 
 
-const PaymentSettingsCollapse = ({paymentSettingsVisibility , handleOnSave}) => {
+const PaymentSettingsCollapse = ({ handleOnSave , closeOverlay }) => {
 
     const [payTime , setPayTime] = useState("now");
     return (
         <>
-        {paymentSettingsVisibility && 
-        <div style={{borderRadius: "16px 16px 0 0" , zIndex: "2000"}} className="mt-auto" >
+        
+        <div style={{borderRadius: "16px 16px 0 0" , zIndex: "2000" , background: "white"}} className="mt-auto" >
             <Wrapper>
                 <div>
                     <h3>Payment Settings</h3>
@@ -90,14 +91,24 @@ const PaymentSettingsCollapse = ({paymentSettingsVisibility , handleOnSave}) => 
                     </ContentBox>
 
                     <ButtonBox className="d-flex gap-3 mt-4">
-                        <button className="btn cancelBtn w-100 ">Cancel</button>
-                        <button className="btn saveBtn w-100 " onClick={handleOnSave}>Save</button>
+                        <button 
+                            className="btn cancelBtn w-100" 
+                            onClick={ closeOverlay }
+                        >
+                            Cancel
+                        </button>
+                        <button 
+                            className="btn saveBtn w-100" 
+                            onClick={ handleOnSave }
+                        >
+                            Save
+                        </button>
                     </ButtonBox>
                 </div>
 
             </Wrapper>
         </div>
-        }
+        
         </>
     )
 }
