@@ -99,7 +99,7 @@ const PaymentSettingsCollapse = ({ handleOnSave , closeOverlay }) => {
                         </button>
                         <button 
                             className="btn saveBtn w-100" 
-                            onClick={ handleOnSave }
+                            onClick={() =>  handleOnSave(payTime) }
                         >
                             Save
                         </button>

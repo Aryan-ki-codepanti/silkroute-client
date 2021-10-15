@@ -242,14 +242,15 @@ const OrderListing = () => {
         setTitle(event.target.value);
     };
 
-    const handleOnSave = async () => {
-        console.log("saved");
+    const handleOnSave = async ( payTime ) => { // status : now -> paid , else billed 
+        console.log("saved" , payTime);
         // Make API request here
-
+        const status = payTime === "now" ? "paid" : "billed";
         const data = {
             title , 
             phone: localStorage.getItem("phone"),
-            items: orderItems 
+            items: orderItems ,
+            status
         }
 
         const response = await axios({
