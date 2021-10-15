@@ -54,6 +54,9 @@ function App() {
             {/* <OTP phone="8700740353" /> */}
             
             {/* Router setup */}
+
+
+
             <BrowserRouter>
                 <Switch>
                     <Route  path="/" exact component={SignUp} />

@@ -7,6 +7,7 @@ import OrderListItem from "./OrderListItem";
 import PaymentSettingsCollapse from "./PaymentSettingsCollapse";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
+import ShareVia from "./ShareVia";
 
 const BackButton = styled.div`
     img {
@@ -98,7 +99,7 @@ const ListingBox = styled.div`
     min-height: 3vh;
 `;
 
-export default function OrderListing() {
+const OrderListing = () => {
     // to store whole as object
     /* {
         title: "Aryan's Order",
@@ -225,7 +226,7 @@ export default function OrderListing() {
         <>
             <Container className="">
                 <BackButton className="mt-3 mb-4 d-flex align-items-center justify-content-between">
-                    <img src={ArrowLeft} alt="arrow-left" />
+                    <img src={ArrowLeft} alt="arrow-left" onClick={() => history.goBack()} />
                     <img
                         src={PaymentSettingsSVG}
                         alt="payment-settings-svg"
@@ -295,7 +296,10 @@ export default function OrderListing() {
                     paymentSettingsVisibility={paymentSettingsVisibility}
                     handleOnSave={handleOnSave}
                 />
+                <ShareVia />
             </Container>
         </>
     );
 }
+
+export default OrderListing;
