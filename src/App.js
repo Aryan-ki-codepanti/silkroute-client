@@ -1,4 +1,4 @@
-
+import "./App.css";
 import Home from "./components/Home";
 import Landing from "./components/Landing";
 // import OTP from "./components/OTP";
@@ -12,6 +12,7 @@ import OrderScreen from "./components/consumer/OrderScreen";
 import PaymentSuccessful from "./components/consumer/PaymentSuccessful";
 import StoreItem from "./components/store/StoreItem";
 import BottomNavbar from "./components/store/BottomNavbar";
+import AddOrderBtn from "./components/AddOrderBtn";
 
 
 function App() {
@@ -19,7 +20,7 @@ function App() {
         <div style={{minHeight: "100vh"}} className="">
             
             {/* <OrderListing /> */}
-            <div className="container px-4 border border-2 py-5 " style={{width: "500px"}}>
+            {/* <div className="container px-4 border border-2 py-5" style={{width: "500px", position: "relative"}}> */}
                 {/* <OrderSummaryListItem
                     title="Aditya's Order"
                     amount="670"
@@ -45,9 +46,11 @@ function App() {
                     amount="2000"
                     message="Pending payment"
                 /> */}
-                <StoreItem />
+                {/* <StoreItem />
+                
                 <BottomNavbar />
-            </div>
+                
+            </div> */}
 
 
             {/* <Landing name="Aryan" /> */}
@@ -64,7 +67,7 @@ function App() {
                 
 
 
-            {/* <BrowserRouter>
+            <BrowserRouter>
                 <Switch>
                     <Route  path="/" exact component={SignUp} />
                     <Route  path="/landing" exact component={Landing} />
@@ -73,7 +76,7 @@ function App() {
                     <Route  path="/orderlisting" exact component={OrderListing} />
                     <Route path="/orderview/:id" exact component={OrderScreen} />
                 </Switch>
-            </BrowserRouter> */}
+            </BrowserRouter>
             
         </div>
     );

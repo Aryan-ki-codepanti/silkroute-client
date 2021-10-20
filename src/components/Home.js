@@ -6,6 +6,7 @@ import PaymentCard from "./PaymentCard";
 import OrderSummaryListItem from "./OrderSummaryListItem";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import AddOrderBtn from "./AddOrderBtn";
 
 // styled components
 const Container = styled.div`
@@ -15,6 +16,16 @@ const Container = styled.div`
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    position: relative;
+    min-height: 100vh;
+    max-height: 800px;
+
+    /* Stick to bottom of phone */
+    @media screen and (max-height: 800px) and (max-width: 600px) {
+        background: red;
+        position: static;
+    }
+
 `;
 
 const OrdersBox = styled.div`
@@ -189,6 +200,19 @@ const Home = (props) => {
                 }
             </OrdersBox>
 
+
+            {/* Add Btn */}
+            <div 
+                className="hangingAddBtn"
+                style={{
+                        position: "absolute",
+                        right: "22%",
+                        bottom: "22%",
+                        zIndex: "10000"
+                    }}
+            >
+                <AddOrderBtn />
+            </div>
         </Container>
     );
 };
