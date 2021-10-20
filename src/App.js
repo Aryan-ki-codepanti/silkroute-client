@@ -10,13 +10,16 @@ import { BrowserRouter , Route , Switch } from "react-router-dom";
 import SignUp from "./components/SignUp";
 import OrderScreen from "./components/consumer/OrderScreen";
 import PaymentSuccessful from "./components/consumer/PaymentSuccessful";
+import StoreItem from "./components/store/StoreItem";
+import BottomNavbar from "./components/store/BottomNavbar";
+
 
 function App() {
     return (
         <div style={{minHeight: "100vh"}} className="">
             
             {/* <OrderListing /> */}
-            {/* <div className="container px-4 border border-2 py-5 " style={{width: "500px"}}> */}
+            <div className="container px-4 border border-2 py-5 " style={{width: "500px"}}>
                 {/* <OrderSummaryListItem
                     title="Aditya's Order"
                     amount="670"
@@ -42,8 +45,11 @@ function App() {
                     amount="2000"
                     message="Pending payment"
                 /> */}
+                <StoreItem />
+                <BottomNavbar />
+            </div>
 
-            {/* </div> */}
+
             {/* <Landing name="Aryan" /> */}
             {/* <OTP></OTP> */}
             {/* <Home /> */}
@@ -53,11 +59,12 @@ function App() {
             {/* <SignUp /> */}
             {/* <OTP phone="8700740353" /> */}
             
+
             {/* Router setup */}
+                
 
 
-
-            <BrowserRouter>
+            {/* <BrowserRouter>
                 <Switch>
                     <Route  path="/" exact component={SignUp} />
                     <Route  path="/landing" exact component={Landing} />
@@ -66,7 +73,7 @@ function App() {
                     <Route  path="/orderlisting" exact component={OrderListing} />
                     <Route path="/orderview/:id" exact component={OrderScreen} />
                 </Switch>
-            </BrowserRouter>
+            </BrowserRouter> */}
             
         </div>
     );
